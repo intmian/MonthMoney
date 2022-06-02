@@ -1,0 +1,36 @@
+{
+  "accounts": [
+    {
+      "name": "支付宝",
+      "debt": false
+    },
+    {
+      "name": "微信",
+      "debt": false
+    },
+    {
+      "name": "现金",
+      "debt": false
+    },
+    {
+      "name": "招行卡",
+      "debt": false
+    },
+    {
+      "name": "招行信用卡",
+      "debt": true
+    },
+    {
+      "name": "白条",
+      "debt": true
+    },
+    {
+      "name": "花呗",
+      "debt": true
+    }
+  ],
+  "invests" : [
+    "基金账户"
+  ],
+  "sumAccountName": "支付宝"
+}
