@@ -1,4 +1,4 @@
-import json
+﻿import json
 from unicodedata import name
 
 # 从图片中读取账本数据
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         accountValue = {}
         invests = data['invests']
         investValue = {}
-        pacList = getPicList('.\\')
+        pacList = getPicList('./')
         print("从图片中读取账本数据:",pacList)
         print("--------------------------------------------")
         for pic in pacList:

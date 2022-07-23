@@ -1,36 +1,36 @@
 {
   "accounts": [
     {
-      "name": "Ö§¸¶±¦",
+      "name": "æ”¯ä»˜å®",
       "debt": false
     },
     {
-      "name": "Î¢ĞÅ",
+      "name": "å¾®ä¿¡",
       "debt": false
     },
     {
-      "name": "ÏÖ½ğ",
+      "name": "ç°é‡‘",
       "debt": false
     },
     {
-      "name": "ÕĞĞĞ¿¨",
+      "name": "æ‹›è¡Œå¡",
       "debt": false
     },
     {
-      "name": "ÕĞĞĞĞÅÓÃ¿¨",
+      "name": "æ‹›è¡Œä¿¡ç”¨å¡",
       "debt": true
     },
     {
-      "name": "°×Ìõ",
+      "name": "ç™½æ¡",
       "debt": true
     },
     {
-      "name": "»¨ßÂ",
+      "name": "èŠ±å‘—",
       "debt": true
     }
   ],
   "invests" : [
-    "»ù½ğÕË»§"
+    "åŸºé‡‘è´¦æˆ·"
   ],
-  "sumAccountName": "Ö§¸¶±¦"
+  "sumAccountName": "æ”¯ä»˜å®"
 }
