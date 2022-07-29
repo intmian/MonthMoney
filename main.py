@@ -1,4 +1,7 @@
-﻿import json
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import json
 from unicodedata import name
 
 # 从图片中读取账本数据
@@ -59,6 +62,9 @@ def delPicList(path):
                 os.remove(os.path.join(root, file))
 
 if __name__ == '__main__':
+    # 将当前文件夹设为运行目录
+    import os
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
     with open(r'setting.json') as f:
         data = json.load(f)
         accountLogicMoney = {}
