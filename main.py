@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/homebrew/bin/python3
 # -*- coding: utf-8 -*-
 
 import json
@@ -50,7 +50,7 @@ def getPicList(path):
     picList = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png':
+            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG':
                 picList.append(os.path.join(root, file))
     return picList
 
@@ -58,7 +58,7 @@ def delPicList(path):
     import os
     for root, dirs, files in os.walk(path):
         for file in files:
-            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png':
+            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG':
                 os.remove(os.path.join(root, file))
 
 if __name__ == '__main__':
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         
         print("清除图片:",pacList)
         print("--------------------------------------------")
-        delPicList('.\\')
+        delPicList('./')
         
         # 展示账本数据
         for value in accountValue:
