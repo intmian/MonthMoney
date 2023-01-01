@@ -61,7 +61,7 @@ def delPicList(path):
             if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG':
                 os.remove(os.path.join(root, file))
 
-if __name__ == '__main__':
+def main():
     # 将当前文件夹设为运行目录
     import os
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -143,6 +143,8 @@ if __name__ == '__main__':
         print("--------------------------------------------")
 
         realSumMoney = input('请输入{}的实际：'.format(sumAccountName))
+        if realSumMoney == "":
+            realSumMoney = sumAccountValue
         realSumMoney = float(eval(realSumMoney))
 
         print("--------------------------------------------")
@@ -169,6 +171,8 @@ if __name__ == '__main__':
         investRealMoneyMap = {}
         for investName in invests:
             money = input('请输入{}的实际值：'.format(investName))
+            if money == "":
+                money = investValue[investName]
             money = float(eval(money))
             investRealMoneyMap[investName] = money
         print("--------------------------------------------")
@@ -179,6 +183,16 @@ if __name__ == '__main__':
                 print(investName, '亏损', -change)
             if change > 0:
                 print(investName, '盈利', change)
-
+        print("--------------------------------------------")
+        for investName in invests:
+            realSumMoney += investRealMoneyMap[investName]
+        print("总资产:",realSumMoney)
         
+        input('按任意键退出')
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        print(e)
         input('按任意键退出')
