@@ -18,6 +18,11 @@ def getPic(accounts,invests, path):
     readNext = False
     strNext = ""
     nextRead = ""
+    # 如果单个字符串为-或一，替换为-，并与下一个字符串合并
+    for i in range(len(texts)):
+        if texts[i] == '-' or texts[i] == '一':
+            if i+1 < len(texts):
+                texts[i] = '-'+texts[i+1]
     for text in texts:
         if text in accountNameList:
             readNext = True
@@ -34,11 +39,25 @@ def getPic(accounts,invests, path):
         if readNext:
             if nextRead == "accounts":
                 text = text.replace(',','')
+                text = text.replace('一','-')
+                needsub = False
+                if text[0] == '-':
+                    needsub = True
+                    text = text[1:]
                 accountValue[strNext] = float(text)
+                if needsub:
+                    accountValue[strNext] = -accountValue[strNext]
                 readNext = False
                 continue
             if nextRead == "invests":
                 text = text.replace(',','')
+                text = text.replace('一','-')
+                if text[0] == '-':
+                    needsub = True
+                    text = text[1:]
+                accountValue[strNext] = float(text)
+                if needsub:
+                    accountValue[strNext] = -accountValue[strNext]
                 investValue[strNext] = float(text)
                 readNext = False
                 continue
@@ -50,7 +69,7 @@ def getPicList(path):
     picList = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG':
+            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG' or os.path.splitext(file)[1] == '.jpeg' :
                 picList.append(os.path.join(root, file))
     return picList
 
@@ -58,7 +77,7 @@ def delPicList(path):
     import os
     for root, dirs, files in os.walk(path):
         for file in files:
-            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG':
+            if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG' or os.path.splitext(file)[1] == '.jpeg':
                 os.remove(os.path.join(root, file))
 
 def main():
@@ -187,7 +206,6 @@ def main():
         for investName in invests:
             realSumMoney += investRealMoneyMap[investName]
         print("总资产:",realSumMoney)
-        
         input('按任意键退出')
 
 if __name__ == '__main__':
