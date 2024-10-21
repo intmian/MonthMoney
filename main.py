@@ -80,6 +80,13 @@ def delPicList(path):
             if os.path.splitext(file)[1] == '.jpg' or os.path.splitext(file)[1] == '.png' or os.path.splitext(file)[1] == '.PNG' or os.path.splitext(file)[1] == '.JPG' or os.path.splitext(file)[1] == '.jpeg':
                 os.remove(os.path.join(root, file))
 
+class Money:
+    def __init__(self) -> None:
+        self.xianjin = 0
+        self.qiankuan = 0
+        self.waihui = 0
+        self.touzi = 0 
+
 def main():
     # 将当前文件夹设为运行目录
     import os
@@ -91,6 +98,9 @@ def main():
         accountValue = {}
         invests = data['invests']
         investValue = {}
+        foreignAccs = data['foreign']
+        foreignValue = {}
+        m = Money()
         pacList = getPicList('./')
         print("从图片中读取账本数据:",pacList)
         print("--------------------------------------------")
@@ -102,6 +112,9 @@ def main():
             for TempInvestValue in TempInvestValues:
                 if TempInvestValue not in investValue:
                     investValue[TempInvestValue] = TempInvestValues[TempInvestValue]
+            for TempForeignValue in foreignValue:
+                if TempForeignValue not in foreignValue:
+                    foreignValue[TempForeignValue] = TempForeignValue
         
         print("清除图片:",pacList)
         print("--------------------------------------------")
@@ -145,6 +158,11 @@ def main():
                 realMoney = float(eval(realMoney))
             if account['debt']:
                 realMoney = -realMoney
+                
+            if account['debt']:
+                m.qiankuan += realMoney
+            else:
+                m.xianjin += realMoney
 
             accountLogicMoney[account['name']] = realMoney - accountLogicMoney[account['name']]
             accountLogicMoney[account['name']] = round(accountLogicMoney[account['name']], 2)
@@ -194,6 +212,7 @@ def main():
                 money = investValue[investName]
             money = float(eval(money))
             investRealMoneyMap[investName] = money
+            m.touzi += money
         print("--------------------------------------------")
         for investName in invests:
             change = investRealMoneyMap[investName] - investValue[investName]
@@ -203,9 +222,28 @@ def main():
             if change > 0:
                 print(investName, '盈利', change)
         print("--------------------------------------------")
-        for investName in invests:
-            realSumMoney += investRealMoneyMap[investName]
-        print("总资产:",realSumMoney)
+        for foreignAcc in foreignAccs:
+            if foreignAcc in foreignValue:
+                pass
+            else:
+                money = input('请输入{}的账面值：'.format(foreignAcc))
+                money = float(eval(money))
+                foreignValue[foreignAcc] = money
+        print("--------------------------------------------")
+        foreignRealMoneyMap = {}
+        for foreignAcc in foreignAccs:
+            moneyRate = input('请输入{}的实际汇率：'.format(foreignAcc))
+            if moneyRate == "":
+                moneyRate = foreignValue[foreignAcc]
+            moneyRate = float(eval(moneyRate))
+            foreignRealMoneyMap[foreignAcc] = foreignValue[foreignAcc] * moneyRate
+            m.waihui += foreignRealMoneyMap[foreignAcc]
+        print("--------------------------------------------")
+        print("现金:",m.xianjin)
+        print("欠款:",m.qiankuan)
+        print("投资:",m.touzi)
+        print("外汇:",m.waihui)
+        print("资产:",m.xianjin-m.qiankuan+m.touzi+m.waihui)
         input('按任意键退出')
 
 if __name__ == '__main__':
