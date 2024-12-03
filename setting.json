@@ -27,17 +27,15 @@
     {
       "name": "花呗",
       "debt": true
-    },
-    {
-      "name": "宁波银行卡",
-      "debt": false
     }
   ],
   "invests" : [
-    "基金账户"
+    "基金账户",
+    "招行投资"
   ],
   "foreign" : [
-    "日元"
+    "日元",
+    "林吉特"
   ],
   "sumAccountName": "支付宝"
 }
